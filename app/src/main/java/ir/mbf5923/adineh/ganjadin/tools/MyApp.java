@@ -28,7 +28,7 @@ public class MyApp extends Application {
         getBaseContext().getResources().updateConfiguration(config,
                 getBaseContext().getResources().getDisplayMetrics());
 
-        Context ctx = getApplicationContext();
+
         NetworkManager.getInstance(getApplicationContext());
         SHPManager.getInstance().setSharedPreferences(getApplicationContext());
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
