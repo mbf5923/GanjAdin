@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/bg"
+    android:layoutDirection="ltr"
+    android:layout_height="match_parent"
+    tools:context=".activity.LoginActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/relback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/backbutton"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:adjustViewBounds="true"
+                app:srcCompat="@drawable/backicon" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+
+                android:background="@drawable/glossybackground"
+
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="10dp">
+
+                <RelativeLayout
+                    android:id="@+id/rellogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:visibility="visible">
+
+                    <ImageView
+
+                        android:id="@+id/imageView3"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+
+                        android:adjustViewBounds="true"
+                        app:srcCompat="@drawable/avatar" />
+
+                    <com.example.myloadingbutton.MyLoadingButton
+                        android:id="@+id/btnlogin"
+                        android:layout_width="100dp"
+                        android:layout_height="35dp"
+                        android:layout_below="@+id/etnumber"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        app:mlb_backgroundColor="@color/green"
+                        app:mlb_label="ورود" />
+
+                    <EditText
+                        android:id="@+id/etnumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imageView3"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="25dp"
+                        android:background="@drawable/editboxlogin"
+                        android:ems="14"
+                        android:gravity="center"
+                        android:hint="شماره موبایل خود را وارد کنید"
+                        android:inputType="number"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/colorAccent"
+                        android:textColorHint="#707070"
+                        android:textSize="20sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relconfirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+
+                    <com.example.myloadingbutton.MyLoadingButton
+                        android:id="@+id/btnconfirm"
+                        android:layout_width="100dp"
+                        android:layout_height="35dp"
+                        android:layout_below="@+id/etcode"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="15dp"
+                        app:mlb_backgroundColor="@color/green"
+                        app:mlb_label="تایید" />
+
+                    <EditText
+                        android:id="@+id/etcode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="60dp"
+                        android:layout_marginRight="25dp"
+                        android:background="@drawable/editboxlogin"
+                        android:ems="14"
+                        android:gravity="center"
+                        android:hint="کد تایید"
+                        android:inputType="number"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/colorAccent"
+                        android:textColorHint="#707070"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/txttimer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/btnconfirm"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="-"
+                        android:textColor="#ffff00"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

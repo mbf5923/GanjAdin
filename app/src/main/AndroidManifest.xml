@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ir.mbf5923.adineh.ganjadin">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name="ir.mbf5923.adineh.ganjadin.tools.MyApp"
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/logo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="ir.mbf5923.adineh.ganjadin.activity.MainActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="ir.mbf5923.adineh.ganjadin.activity.IntroActivity"
+            android:theme="@style/Theme.Intro" />
+        <activity
+            android:name="ir.mbf5923.adineh.ganjadin.activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name="ir.mbf5923.adineh.ganjadin.activity.AccountActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden">
+
+        </activity>
+        <activity
+            android:name="ir.mbf5923.adineh.ganjadin.activity.ChallengeInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="ir.mbf5923.adineh.ganjadin.activity.ChallengeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="ir.mbf5923.adineh.ganjadin.activity.ScanActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="ir.mbf5923.adineh.ganjadin.activity.WinnerActivity"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+
+        <service
+            android:name="ir.mbf5923.adineh.ganjadin.notification.MyFirebaseMessagingService"
+            android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name="ir.mbf5923.adineh.ganjadin.activity.FAQActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="ir.mbf5923.adineh.ganjadin.activity.SupportActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="ir.mbf5923.adineh.ganjadin.activity.AboutActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="ir.mbf5923.adineh.ganjadin.activity.NewsActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="NewsActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

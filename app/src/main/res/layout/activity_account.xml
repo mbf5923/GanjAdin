@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layoutDirection="ltr"
+    android:layout_height="match_parent"
+    android:background="@drawable/twocolorbackground"
+    tools:context=".activity.AccountActivity">
+    <RelativeLayout
+        android:id="@+id/relback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/backbutton"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/backicon"
+            app:srcCompat="@drawable/backicon" />
+    </RelativeLayout>
+    <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:spb_sections_count="4"
+        android:id="@+id/pbProgress"
+        style="@style/GPlusProgressBar"
+        app:spb_speed="2.0"
+        app:spb_stroke_width="4dp"
+        app:spb_stroke_separator_length="4dp"
+        app:spb_reversed="false"
+        app:spb_mirror_mode="true"
+        app:spb_progressiveStart_activated="true"
+        app:spb_progressiveStart_speed="1.5"
+        app:spb_progressiveStop_speed="3.4"
+        />
+    <RelativeLayout
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/relacount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgavatar"
+            android:layout_marginTop="-40dp"
+            android:background="@drawable/glossybackground"
+            android:paddingLeft="10dp"
+            android:paddingTop="40dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp">
+
+            <EditText
+                android:id="@+id/etname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="نام"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="#c7c7c7" />
+
+            <EditText
+                android:id="@+id/etfamily"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etname"
+                android:ems="10"
+                android:hint="نام خانوادگی"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="#c7c7c7" />
+
+            <EditText
+                android:id="@+id/etnationalcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etfamily"
+                android:ems="10"
+                android:hint="کد ملی"
+                android:inputType="number"
+                android:textColor="@color/colorAccent"
+                android:textColorHint="#c7c7c7" />
+
+            <com.example.myloadingbutton.MyLoadingButton
+                android:id="@+id/btnsave"
+                android:layout_width="100dp"
+                android:layout_height="35dp"
+                android:layout_below="@+id/etnationalcode"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                app:mlb_backgroundColor="@color/green"
+                app:mlb_label="ذخیره" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/imgavatar"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/accounticon" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/relcharge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgacharge"
+            android:layout_marginTop="-40dp"
+            android:background="@drawable/glossybackground"
+            android:paddingLeft="10dp"
+            android:paddingTop="40dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp">
+
+
+            <TextView
+                android:id="@+id/tvcurrentcharge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="اعتبار موجود در حساب شما:0 تومان"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvrequiercharge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvcurrentcharge"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="اعتبار مورد نیاز:0 تومان"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
+            <com.example.myloadingbutton.MyLoadingButton
+                android:id="@+id/btncharge"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/tvrequiercharge"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                app:mlb_backgroundColor="@color/green"
+                app:mlb_label="افزایش اعتبار" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/imgacharge"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/walleticon" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/relhistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imghistory"
+            android:layout_marginTop="-40dp"
+            android:background="@drawable/glossybackground"
+            android:paddingLeft="10dp"
+            android:paddingTop="40dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp">
+
+
+            <TextView
+                android:id="@+id/tvnumofyouin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="تعداد مسابقات شرکت کرده:"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvnumofchallenge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvnumofyouin"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="تعداد مسابقات برگزار شده:"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/imghistory"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@drawable/historyicon" />
+    </RelativeLayout>
+
+
+    <com.irozon.justbar.JustBar
+        android:id="@+id/menubar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layoutDirection="rtl">
+
+        <com.irozon.justbar.BarItem
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:icon="@drawable/acmenuusericon"
+            app:radius="25dp"
+            app:selected="true"
+            app:selectedColor="@color/colorAccent"
+            app:selectedIconColor="#fff"
+            app:unSelectedColor="#fff"
+            app:unSelectedIconColor="@color/colorAccent" />
+
+        <com.irozon.justbar.BarItem
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:icon="@drawable/acmenubasketicon"
+            app:radius="25dp"
+            app:selectedColor="@color/colorAccent"
+            app:selectedIconColor="#fff"
+            app:unSelectedColor="#fff"
+            app:unSelectedIconColor="@color/colorAccent" />
+
+        <com.irozon.justbar.BarItem
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:icon="@drawable/acmenuhistoryicon"
+            app:radius="25dp"
+            app:selectedColor="@color/colorAccent"
+            app:selectedIconColor="#fff"
+            app:unSelectedColor="#fff"
+            app:unSelectedIconColor="@color/colorAccent" />
+
+
+    </com.irozon.justbar.JustBar>
+</RelativeLayout>

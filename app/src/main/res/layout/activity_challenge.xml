@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:layoutDirection="ltr"
+    tools:context=".activity.ChallengeActivity">
+    <RelativeLayout
+        android:id="@+id/relback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/backbutton"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="5dp">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/backicon"
+            app:srcCompat="@drawable/backicon" />
+    </RelativeLayout>
+    <fr.castorflex.android.smoothprogressbar.SmoothProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/pbProgress"
+        style="@style/GPlusProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:spb_mirror_mode="true"
+        app:spb_progressiveStart_activated="true"
+        app:spb_progressiveStart_speed="1.5"
+        app:spb_progressiveStop_speed="3.4"
+        app:spb_reversed="false"
+        app:spb_sections_count="4"
+        app:spb_speed="2.0"
+        app:spb_stroke_separator_length="4dp"
+        app:spb_stroke_width="4dp" />
+
+    <RelativeLayout
+        android:id="@+id/reltask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:padding="15dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvtasklevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/taskheader"
+            android:padding="10dp"
+            android:text="--------"
+            android:textColor="@color/colorAccent" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvtasklevel"
+            android:background="@drawable/taskbackground"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/tvtaskname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="---"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/tvtaskinfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvtaskname"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:text="---"
+                android:textColor="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/btnscan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvtaskinfo"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/btnaccess"
+                android:padding="5dp"
+                android:text="اسکن بارکد مرحله" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/reltimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/glossybackground"
+        android:padding="10dp"
+        android:visibility="gone">
+
+        <com.github.anastr.flattimelib.CountDownTimerView
+            android:id="@+id/mHourGlass"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            app:elapsedTimeColor="@color/colorAccent"
+            app:indicatorColor="@color/green"
+            app:remainingTimeColor="@color/pink"
+            app:strokeColor="@color/colorAccent"
+            app:strokeWidth="5dp" />
+
+        <TextView
+            android:id="@+id/tvtimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mHourGlass"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/pocket_color_3"
+            android:textSize="20sp" />
+    </RelativeLayout>
+</RelativeLayout>

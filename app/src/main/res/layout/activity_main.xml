@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layoutDirection="ltr"
+    android:background="@drawable/bg"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity">
+
+    <fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:spb_sections_count="4"
+        android:id="@+id/pbProgress"
+        style="@style/GPlusProgressBar"
+        app:spb_speed="2.0"
+        app:spb_stroke_width="4dp"
+        app:spb_stroke_separator_length="4dp"
+        app:spb_reversed="false"
+        app:spb_mirror_mode="true"
+        app:spb_progressiveStart_activated="true"
+        app:spb_progressiveStart_speed="1.5"
+        app:spb_progressiveStop_speed="3.4"
+        />
+
+    <RelativeLayout
+        android:id="@+id/relmenu"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp">
+
+        <com.nightonke.boommenu.BoomMenuButton
+            android:id="@+id/bmb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            android:visibility="gone"
+            app:backgroundTint="@color/pink"
+
+
+            app:bmb_buttonEnum="ham"
+            app:bmb_buttonPlaceEnum="buttonPlace_ham_5"
+            app:bmb_piecePlaceEnum="piecePlace_ham_5">
+
+        </com.nightonke.boommenu.BoomMenuButton>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/relstart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/glossybackground"
+        android:paddingBottom="10dp"
+        android:visibility="gone">
+
+        <ImageView
+
+            android:id="@+id/imageView3"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+
+            android:adjustViewBounds="true"
+            app:srcCompat="@drawable/map" />
+
+        <TextView
+            android:id="@+id/tvinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="برای ورود به مسابقه بر روی شروع کلیک کنید"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp" />
+
+
+        <com.example.myloadingbutton.MyLoadingButton
+            android:id="@+id/btnstart"
+
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/tvinfo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            app:mlb_backgroundColor="@color/green"
+            app:mlb_label="شروع" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relretry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/glossybackground"
+        android:padding="10dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true"
+            app:srcCompat="@drawable/connectionicon" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView6"
+            android:layout_marginTop="10dp"
+            android:text="ارتباط شما با سرورهای ما برقرار نشد،لطفا از وصل بودن اینترنت مطمئن بشید و دوباره سعی کنید"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp" />
+
+        <com.example.myloadingbutton.MyLoadingButton
+            android:id="@+id/btnretry"
+
+            android:layout_width="150dp"
+            android:layout_height="45dp"
+            android:layout_below="@+id/textView6"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            app:mlb_backgroundColor="@color/green"
+            app:mlb_label="دوباره تلاش کن" />
+    </RelativeLayout>
+
+
+</RelativeLayout>
