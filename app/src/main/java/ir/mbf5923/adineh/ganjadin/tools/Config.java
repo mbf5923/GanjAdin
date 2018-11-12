@@ -5,7 +5,7 @@ package ir.mbf5923.adineh.ganjadin.tools;
  */
 
 public class Config {
-    public static final String WebServiceUrl = "http://ganjadin.com/mobserv/";
+    public static final String WebServiceUrl = "https://ganjadin.com/mobserv/";
     public static final String qrperfix="ganjadin";
     public static final String Appname = "ganjadin";
 
