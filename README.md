@@ -1,5 +1,5 @@
 # GanjAdin
-[![version](https://img.shields.io/badge/version-1.0-green.svg)](https://github.com/mbf5923/GanjAdin/releases/)
+[![version](https://img.shields.io/badge/version-1.3-green.svg)](https://github.com/mbf5923/GanjAdin/releases/)
 
 سلام
 سورس کد نرم افزار اندرود گنج آدین
