@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="ir.mbf5923.adineh.ganjadin">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        tools:replace="android:allowBackup"
         android:name="ir.mbf5923.adineh.ganjadin.tools.MyApp"
         android:hardwareAccelerated="true"
         android:icon="@drawable/logo"

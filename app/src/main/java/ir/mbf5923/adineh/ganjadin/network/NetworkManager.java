@@ -7,6 +7,7 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.AnalyticsListener;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import com.androidnetworking.interfaces.StringRequestListener;
 
 import org.json.JSONObject;
 
@@ -475,40 +476,7 @@ public class NetworkManager {
     }
 
 
-    public void checkinchallenge(final NetworkListener listener, final String phone, final String token) {
-        AndroidNetworking.post(Config.WebServiceUrl + "checkinchallenge")
-                .addBodyParameter("phone", phone)
-                .addBodyParameter("token", token)
-                .setTag("checkinchallenge")
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .setAnalyticsListener(new AnalyticsListener() {
-                    @Override
 
-                    public void onReceived(long timeTakenInMillis, long bytesSent, long bytesReceived, boolean isFromCache) {
-                        long crntbt = SHPManager.getInstance().GetByteRec();
-                        crntbt = bytesReceived + crntbt;
-                        SHPManager.getInstance().SetByteRec(crntbt);
-                        crntbt = SHPManager.getInstance().GetByteSend();
-                        crntbt = bytesSent + crntbt;
-                        SHPManager.getInstance().SetByteSend(crntbt);
-                    }
-                })
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        // do anything with response
-                        listener.onResult(response);
-                    }
-
-                    @Override
-                    public void onError(ANError error) {
-                        // handle error
-                        listener.onError(error);
-                    }
-                });
-
-    }
 
 
     public void checkscaned(final NetworkListener listener, final String phone, final String token,String qrcode) {
@@ -519,6 +487,7 @@ public class NetworkManager {
                 .setTag("checkscaned")
                 .setPriority(Priority.MEDIUM)
                 .build()
+
                 .setAnalyticsListener(new AnalyticsListener() {
                     @Override
 
@@ -531,6 +500,7 @@ public class NetworkManager {
                         SHPManager.getInstance().SetByteSend(crntbt);
                     }
                 })
+
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -544,6 +514,8 @@ public class NetworkManager {
                         listener.onError(error);
                     }
                 });
+
+
 
     }
 

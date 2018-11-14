@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView5"
         android:layout_marginTop="10dp"
-        android:text="تبریک میگیم، شما برنده جایزه این هفته شدید،برای دریافت جایزه خودتون به نگهبان کلید مراجعه کنید."
+        android:text="تبریک میگیم، شما برنده جایزه این مرحله شدید،برای دریافت جایزه خودتون به نگهبان کلید مراجعه کنید."
         android:textColor="#ffffff"
         android:textSize="24sp" />
 

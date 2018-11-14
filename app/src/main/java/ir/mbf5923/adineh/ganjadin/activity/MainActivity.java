@@ -1,14 +1,21 @@
 package ir.mbf5923.adineh.ganjadin.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ContextThemeWrapper;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -48,12 +55,14 @@ public class MainActivity extends AppCompatActivity {
     private String phonebrand, phonemodel, uniqid, simoperator;
     private int version;
     private RelativeLayout relstart, relretry, relmenu;
+    private AlertDialog updatealert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sp = this;
+
         relmenu = findViewById(R.id.relmenu);
         btnretry = findViewById(R.id.btnretry);
         btnretry.setMyButtonClickListener(() -> {
@@ -100,29 +109,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
+        if (updatealert != null) {
+            updatealert.dismiss();
+        }
         bmb.setVisibility(View.GONE);
         btnretry.showNormalButton();
         relstart.setVisibility(View.GONE);
         relretry.setVisibility(View.GONE);
-        token = SHPManager.getInstance().GetToken();
-        phone = SHPManager.getInstance().GetPhone();
-        if (!token.equals("")) {
-            pbProgress.setVisibility(View.VISIBLE);
-            checklogin();
-        } else {
-            pbProgress.setVisibility(View.GONE);
-            relstart.setVisibility(View.VISIBLE);
-            relretry.setVisibility(View.GONE);
-            menubuilder();
-        }
+        pbProgress.setVisibility(View.VISIBLE);
+        checklogin();
+
     }
 
     private void checklogin() {
+
         NetworkManager.getInstance().checklogin(new NetworkListener() {
             @Override
             public void onResult(JSONObject result) {
                 checkloginresponse(result);
+
             }
 
             @Override
@@ -152,22 +157,52 @@ public class MainActivity extends AppCompatActivity {
 
         try {
 
-            if (object.getInt("id") == 1) {
-                checkinchallenge();
+            if (object.getInt("islogin") == 1) {
+                token = SHPManager.getInstance().GetToken();
+                phone = SHPManager.getInstance().GetPhone();
+                getinfo();
             } else {
                 SHPManager.getInstance().cleardata();
                 token = "";
                 phone = "";
-                Alerter.create(sp)
-                        .setDuration(5000)
-                        .setTitle("خطا")
-                        .setText(object.getString("msg"))
-                        .setContentGravity(Gravity.END)
-                        .setBackgroundColorInt(Color.parseColor("#FF1D4C"))
-                        .setIcon(R.drawable.erroricon)
-                        .enableSwipeToDismiss()
-                        .show();
             }
+
+            if (object.getInt("inchallenge") == 1) {
+                btnstart.setButtonLabel("ادامه");
+                tvinfo = findViewById(R.id.tvinfo);
+                tvinfo.setText("برای ادامه مسابقه بر روی ادامه کلیک کنید");
+                btnstart.setMyButtonClickListener(() -> {
+                    btnstart.showNormalButton();
+                    Intent intent = new Intent(sp, ChallengeActivity.class);
+                    startActivity(intent);
+                });
+            } else {
+                btnstart.setButtonLabel("شروع");
+                tvinfo = findViewById(R.id.tvinfo);
+                tvinfo.setText("برای ورود به مسابقه بر روی شروع کلیک کنید");
+                btnstart.setMyButtonClickListener(() -> {
+                    if (!token.equals("")) {
+                        checkchallengedate();
+                    } else {
+                        Alerter.create(sp)
+                                .setDuration(5000)
+                                .setTitle("حساب کاربری")
+                                .setText("برای شرکت توی مسابقه باید ثبت نام کنی و یا اگه قبلا ثبت نام کردی وارد حساب کاربریت بشی.")
+                                .setContentGravity(Gravity.END)
+                                .setBackgroundColorInt(Color.parseColor("#FFB64F"))
+                                .setIcon(R.drawable.warningicon)
+                                .enableSwipeToDismiss()
+                                .show();
+                        btnstart.showErrorButton();
+                    }
+                });
+            }
+            pbProgress.setVisibility(View.GONE);
+            relstart.setVisibility(View.VISIBLE);
+            relretry.setVisibility(View.GONE);
+            versioncheck(object.getInt("versioncode"), object.getInt("mustupdate"), object.getString("updatemessage"), object.getString("appurl"));
+
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -279,16 +314,16 @@ public class MainActivity extends AppCompatActivity {
         bmb.setVisibility(View.VISIBLE);
 
 
-            new FancyShowCaseView.Builder(sp)
-                    .focusOn(relmenu)
-                    .title("از این قسمت به منوی برنامه دسترسی پیدا کنید")
-                    .titleGravity(Gravity.CENTER)
-                    .titleStyle(R.style.MyTitleStyle, Gravity.CENTER|Gravity.CENTER )
-                    .enableAutoTextPosition()
-                    .closeOnTouch(true)
-                    .showOnce("menu")
-                    .build()
-                    .show();
+        new FancyShowCaseView.Builder(sp)
+                .focusOn(relmenu)
+                .title("از این قسمت به منوی برنامه دسترسی پیدا کنید")
+                .titleGravity(Gravity.CENTER)
+                .titleStyle(R.style.MyTitleStyle, Gravity.CENTER | Gravity.CENTER)
+                .enableAutoTextPosition()
+                .closeOnTouch(true)
+                .showOnce("menu")
+                .build()
+                .show();
 
     }
 
@@ -326,58 +361,6 @@ public class MainActivity extends AppCompatActivity {
         }, phone, token);
     }
 
-    private void checkinchallenge() {
-        NetworkManager.getInstance().checkinchallenge(new NetworkListener() {
-            @Override
-            public void onResult(JSONObject result) {
-                try {
-                    if (result.getInt("id") == 2) {
-                        btnstart.setButtonLabel("ادامه");
-                        tvinfo = findViewById(R.id.tvinfo);
-                        tvinfo.setText("برای ادامه مسابقه بر روی ادامه کلیک کنید");
-                        btnstart.setMyButtonClickListener(() -> {
-                            btnstart.showNormalButton();
-                            Intent intent = new Intent(sp, ChallengeActivity.class);
-                            startActivity(intent);
-                        });
-                    } else if (result.getInt("id") == 1) {
-                        btnstart.setButtonLabel("شروع");
-                        tvinfo = findViewById(R.id.tvinfo);
-                        tvinfo.setText("برای ورود به مسابقه بر روی شروع کلیک کنید");
-                        btnstart.setMyButtonClickListener(() -> {
-                            if (!token.equals("")) {
-                                checkchallengedate();
-                            } else {
-                                Alerter.create(sp)
-                                        .setDuration(5000)
-                                        .setTitle("حساب کاربری")
-                                        .setText("برای شرکت توی مسابقه باید ثبت نام کنی و یا اگه قبلا ثبت نام کردی وارد حساب کاربریت بشی.")
-                                        .setContentGravity(Gravity.END)
-                                        .setBackgroundColorInt(Color.parseColor("#FFB64F"))
-                                        .setIcon(R.drawable.warningicon)
-                                        .enableSwipeToDismiss()
-                                        .show();
-                                btnstart.showErrorButton();
-                            }
-
-
-                        });
-                    }
-                    pbProgress.setVisibility(View.GONE);
-                    relstart.setVisibility(View.VISIBLE);
-                    relretry.setVisibility(View.GONE);
-                    getinfo();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onError(ANError error) {
-
-            }
-        }, SHPManager.getInstance().GetPhone(), SHPManager.getInstance().GetToken());
-    }
 
     private void getinfo() {
 
@@ -413,6 +396,42 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void versioncheck(int version, int mustupdate, String updatemessage,String appurl) {
+        int versionCode = 0;
+        try {
+            PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            versionCode = packageInfo.versionCode;
+            if (version > versionCode) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(sp,
+                        R.style.AlertDialogCustom));
+                if (mustupdate == 0) {
+                    alertDialogBuilder.setCancelable(true);
+                }else {
+                    alertDialogBuilder.setCancelable(false);
+                }
+
+                alertDialogBuilder.setTitle("بروزرسانی");
+                alertDialogBuilder.setMessage(updatemessage);
+
+                alertDialogBuilder.setPositiveButton("بروزرسانی", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //sp.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + sp.getPackageName())));
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(appurl));
+                        startActivity(browserIntent);
+                        dialog.cancel();
+                    }
+                });
+                updatealert = alertDialogBuilder.show();
+                TextView titleView = updatealert.findViewById(sp.getResources().getIdentifier("alertTitle", "id", "android"));
+                if (titleView != null) {
+                    titleView.setGravity(Gravity.RIGHT);
+                }
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            //Handle exception
+        }
     }
 
     @Override

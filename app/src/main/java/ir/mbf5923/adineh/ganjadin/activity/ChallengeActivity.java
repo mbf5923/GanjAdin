@@ -81,7 +81,8 @@ public class ChallengeActivity extends AppCompatActivity {
                         reltask.setVisibility(View.VISIBLE);
                         tvtasklevel.setText(numtotext(result.getInt("tasknumber")));
                         tvtaskname.setText(result.getString("taskname"));
-                        tvtaskinfo.setText(result.getString("taskinfo"));
+                        tvtaskinfo.setText(result.getString("taskinfo")+"\n"+"مبلغ جایزه نفر اول در این مرحله: " +result.getString("price")+" تومان");
+
                         btnscan.setClickable(true);
                     } else {
                         if (result.getLong("timeleft") > 0) {
@@ -94,7 +95,7 @@ public class ChallengeActivity extends AppCompatActivity {
                                     int seconds = totalSecs % 60;
                                     String timeString = String.format("%02d:%02d", minutes, seconds);
                                     try {
-                                        tvtimer.setText(timeString + " تا شروع " + numtotext(result.getInt("tasknumber")));
+                                        tvtimer.setText(timeString + " تا شروع " + numtotext(result.getInt("tasknumber"))+"\n"+"مبلغ جایزه نفر اول در این مرحله: " +result.getString("price")+" تومان");
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                         tvtimer.setText(timeString);

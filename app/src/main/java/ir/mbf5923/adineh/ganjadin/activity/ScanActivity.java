@@ -67,9 +67,9 @@ private ZXingScannerView.ResultHandler xxx;
                         if (result.getInt("id") == 1) {
                             //not end challenge
                             Alerter.create(sp)
-                                    .setDuration(3000)
+                                    .setDuration(5000)
                                     .setTitle("پایان مرحله")
-                                    .setText("این مرحله رو با موفقیت گذروندی حالا بریم مرحله بعد.")
+                                    .setText("این مرحله رو با موفقیت گذروندی ولی متاسفانه برنده این مرحله نشدی، حالا بریم مرحله بعد به امید اینکه برنده این مرحله باشی.")
                                     .setContentGravity(Gravity.END)
                                     .setBackgroundColorInt(Color.parseColor("#00DCBF"))
                                     .setIcon(R.drawable.successicon)
@@ -87,9 +87,9 @@ private ZXingScannerView.ResultHandler xxx;
                         } else if (result.getInt("id") == 2) {
                             //end challenge but not winner
                             Alerter.create(sp)
-                                    .setDuration(3000)
+                                    .setDuration(5000)
                                     .setTitle("پایان مسابقه")
-                                    .setText("شما مسابقه را با موفقیت به پایان رساندید اما متاسفانه قبل از شما بازیکن دیگری برنده مسابقه شده است.")
+                                    .setText("شما مرحله آخر رو با موفقیت به پایان رسوندی اما متاسفانه برنده این مرحله نشدی.")
                                     .setContentGravity(Gravity.END)
                                     .setBackgroundColorInt(Color.parseColor("#00DCBF"))
                                     .setIcon(R.drawable.successicon)
@@ -105,9 +105,9 @@ private ZXingScannerView.ResultHandler xxx;
                         } else if (result.getInt("id") == 3) {
                             //is winner
                             Alerter.create(sp)
-                                    .setDuration(3000)
+                                    .setDuration(5000)
                                     .setTitle("پایان مسابقه")
-                                    .setText("تبریک میگیم، شما برنده مسابقه این هفته ما شدید.")
+                                    .setText("تبریک میگیم، شما مرحله آخر مسابقه رو به پایان رسوندید و برنده این مرحله از مسابقه شدید، جایزه این مرحله مبلغ: " +result.getString("price")+" تومان بود.")
                                     .setContentGravity(Gravity.END)
                                     .setBackgroundColorInt(Color.parseColor("#00DCBF"))
                                     .setIcon(R.drawable.successicon)
@@ -116,6 +116,26 @@ private ZXingScannerView.ResultHandler xxx;
                                         @Override
                                         public void onHide() {
 
+                                            Intent intent = new Intent(sp, WinnerActivity.class);
+                                            startActivity(intent);
+                                            mScannerView.stopCamera();
+                                            sp.finish();
+                                        }
+                                    })
+                                    .show();
+                        }else if (result.getInt("id") == 4) {
+                            //is winner
+                            Alerter.create(sp)
+                                    .setDuration(5000)
+                                    .setTitle("پایان مرحله")
+                                    .setText("تبریک میگیم، شما این مرحله رو به پایان رسوندید و برنده این مرحله از مسابقه شدید، جایزه این مرحله مبلغ: " +result.getString("price")+" تومان بود.")
+                                    .setContentGravity(Gravity.END)
+                                    .setBackgroundColorInt(Color.parseColor("#00DCBF"))
+                                    .setIcon(R.drawable.successicon)
+                                    .enableSwipeToDismiss()
+                                    .setOnHideListener(new OnHideAlertListener() {
+                                        @Override
+                                        public void onHide() {
                                             Intent intent = new Intent(sp, WinnerActivity.class);
                                             startActivity(intent);
                                             mScannerView.stopCamera();
